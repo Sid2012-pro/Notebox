@@ -5,13 +5,13 @@
 }
 
 :root {
-    --bg-dark: #0a0b10;
-    --panel-bg: #121420;
-    --panel-border: #2a2e45;
-    --neon-cyan: #00ffcc;
-    --neon-pink: #ff0055;
-    --neon-yellow: #ffcc00;
-    --text-dim: #5c658a;
+    --bg-dark: #141620;
+    --panel-bg: #121318;
+    --panel-border: #131629;
+    --neon-cyan: #63f6d8;
+    --neon-pink: #ee5588;
+    --neon-yellow: #eed261;
+    --text-dim: #7987bc;
 }
 
 body {
