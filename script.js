@@ -26,6 +26,7 @@ function resizeCanvas() {
     canvas.height = rect.height - 30;
     draw();
 }
+
 window.addEventListener('load', () => {
     resizeCanvas();
     initUIControls();
@@ -39,15 +40,15 @@ function draw() {
     const cellH = canvas.height / ROWS;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let r = 0; r < ROWS; r++) {
-        ctx.fillStyle = "#ffcc00"
+        ctx.fillStyle = '#ffcc00';
         ctx.font = '8px "Press Start 2P", monospace';
         ctx.textAlign = 'right';
-        ctx.textBaseLine = 'middle';
+        ctx.textBaseline = 'middle';
         ctx.fillText(noteLabels[r], LABEL_WIDTH - 8, r * cellH + cellH / 2);
         for (let c = 0; c < COLS; c++) {
             const x = LABEL_WIDTH + c * cellW;
             const y = r * cellH;
-            ctx.fillStyle = grid[r][c] ? '#00ffcc' : (c === step && isPlaying ? '#2a2e45' : "#121420");
+            ctx.fillStyle = grid[r][c] ? '#00ffcc' : (c === step && isPlaying ? '#2a2e45' : '#121420');
             ctx.fillRect(x, y, cellW - 2, cellH - 2);
             if (isPlaying && c === step) {
                 ctx.fillStyle = 'rgba(255, 0, 85, 0.25)';
@@ -75,7 +76,7 @@ canvas.addEventListener('click', (e) => {
 function tick() {
     for (let r = 0; r < ROWS; r++) {
         if (grid[r][step]) {
-            play(freqs[r])
+            play(freqs[r]);
         }
     }
     draw();
@@ -98,7 +99,7 @@ function play(freq) {
 
 function initAudioContext() {
     if (!audioCtx) {
-        audioCtx.new(window.AudioContext || window.webkitAudioContext)();
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
     if (audioCtx.state === 'suspended') {
         audioCtx.resume();
@@ -109,10 +110,11 @@ function togglePlay() {
     initAudioContext();
     isPlaying = !isPlaying;
     const playBtn = document.getElementById('playBtn');
-    if (isPLaying) {
+
+    if (isPlaying) {
         if (playBtn) {
             playBtn.textContent = '⏸ PAUSE';
-            playBtn.style.background = "#00ffcc";
+            playBtn.style.background = '#00ffcc';
             playBtn.style.color = '#000';
         }
         intervalId = setInterval(tick, (60 / bpm / 4) * 1000);
@@ -133,7 +135,7 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         togglePlay();
     }
-})
+});
 
 function initUIControls() {
     const instSelector = document.querySelector('.InstrumentSelector');
