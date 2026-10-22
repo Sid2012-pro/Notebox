@@ -1,41 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notebox</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <div class="toolbar">
-        <div class="menu-items">
-            <div>File</div>
-            <div>Edit</div>
-            <div>Window</div>
-            <div>Options</div>
+        <div class="menu-items" id="menuBar">
+            <div class="menu-title" data-menu="File">File</div>
+            <div class="menu-title" data-menu="Edit">Edit</div>
+            <div class="menu-title" data-menu="Window">Window</div>
+            <div class="menu-title" data-menu="Options">Options</div>
         </div>
         <div class="logo">NOTEBOX</div>
     </div>
+    <div class="transport">
+        <div class="tgroup">
+            <button class="btn play" id="btnPlay">▶ PLAY</button>
+            <button class="btn" id="btnStop">■ STOP</button>
+            <button class="btn rec" id="btnRec">● REC</button>
+            <button class="btn" id="btnLoop">LOOP</button>
+            <button class="btn" id="btnMetro">METRO</button>
+        </div>
+        <div class="timedisp" id="timeDisp">1:1:1</div>
+        <div class="tgroup">
+            <label>BPM</label>
+            <input type="number" id="bpm" min="40" max="240" value="110" />
+            <button class="btn" id="btnTap">TAP</button>
+        </div>
+        <div class="tgroup">
+            <label>BARS</label>
+            <select id="bars">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="tgroup">
+            <label>NOTE</label>
+            <select id="noteLen">
+                <option value="1">1/16</option>
+                <option value="2">1/8</option>
+                <option value="4">1/4</option>
+                <option value="8">1/2</option>
+                <option value="16">1 BAR</option>
+            </select>
+        </div>
+        <div class="tgroup">
+            <label>SWING</label>
+            <input type="range" id="swing" min="0" max="100" value="0" />
+        </div>
+        <div class="tgroup">
+            <label>VOL</label>
+            <input type="range" id="masterVol" min="0" max="1" step="0.01" value="0.8" />
+        </div>
+        <div class="tgroup">
+            <label>ZOOM</label>
+            <button class="btn" id="zoomOut">-</button>
+            <button class="btn" id="defaultZoom">RESET</button>
+            <button class="btn" id="zoomIn">+</button>
+        </div>
+    </div>
 
     <main class="app-container">
-        <div class="InstrumentSelector">
+        <div class="col col-left" id="colLeft">
+            <div class="InstrumentSelector" id="panelInstruments">
+                <div class="pbody" id="instBody"></div>
+            </div>
+            <div class="TrackEditor" id="panelMixer">
+                <div class="pbody" id="mixBody"></div>
+            </div>
         </div>
-
-        <div class="beatMaker">
-            <canvas id="beatCanvas"></canvas>
-        </div>
-
-        <div class="PianoRoll">
-            <canvas id="pianoCanvas"></canvas>
-        </div>
-
-        <div class="TrackEditor">
+        <div class="col col-right" id="colRight">
+            <div class="beatMaker" id="panelBeat">
+                <div class="canvasWrap">
+                    <canvas id="beatCanvas"></canvas>
+                </div>
+            </div>
+            <div class="PianoRoll" id="panelRoll">
+                <div class="canvasWrap">
+                    <canvas id="pianoCanvas"></canvas>
+                </div>
+            </div>
         </div>
     </main>
-
+    <div id="toast"></div>
+    <input type="file" id="fileInput" accept=".json,application/json" hidden />
     <script src="script.js"></script>
 </body>
 
